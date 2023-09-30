@@ -1,0 +1,127 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+void displayBoard(const vector<vector<char>>& table) 
+{
+    for (int i = 0; i < 3; ++i) 
+    {
+        for (int j = 0; j < 3; ++j) 
+        {
+            cout << table[i][j];
+            if (j < 2) 
+            {
+                cout << " | ";
+            }
+        }
+        cout << endl;
+        if (i < 2)
+        {
+            cout << "---------" << endl;
+        }
+    }
+}
+
+
+bool checkVictory(const vector<vector<char>>& table, char contender) 
+{
+    
+    for (int i = 0; i < 3; ++i) 
+    {
+        if (table[i][0] == contender && table[i][1] == contender && table[i][2] == contender) 
+        {
+            return true; 
+        }
+        if (table[0][i] == contender && table[1][i] == contender && table[2][i] == contender) 
+        {
+            return true; 
+        }
+    }
+    if (table[0][0] == contender && table[1][1] == contender && table[2][2] == contender) 
+    {
+        return true;
+    }
+    if (table[0][2] == contender && table[1][1] == contender && table[2][0] == contender) 
+    {
+        return true;
+    }
+    return false;
+}
+
+
+bool checkDraw(const vector<vector<char>>& table) 
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j) 
+        {
+            if (table[i][j] == ' ') 
+            {
+                return false; 
+            }
+        }
+    }
+    return true; 
+}
+
+int main() 
+{
+    vector<vector<char>> table(3, vector<char>(3, ' '));
+    char currentContender = 'X';
+    bool gameVictory1
+     = false;
+    bool gameDraw = false;
+
+    cout << "Welcome to the game of Tic-Tac-Toe!" << endl;
+
+    do 
+    {
+        cout << "Current situation of the board:" << endl;
+        displayBoard(table);
+
+        int row, col;
+        cout << "Player " << currentContender << ", enter your move (row): "<< endl;
+        cin >> row;
+        cout << "Player " << currentContender << ", enter your move (column): "<< endl;
+        cin >> col;
+
+        
+        if (row < 1 || row > 3 || col < 1 || col > 3 || table[row - 1][col - 1] != ' ') 
+        {
+            cout << "Invalid move. Try again." << endl;
+            continue;
+        }
+
+        table[row - 1][col - 1] = currentContender;
+
+        
+        if (checkVictory(table, currentContender))
+        {
+            gameVictory1
+             = true;
+        } 
+        else 
+        {
+            gameDraw = checkDraw(table);
+            currentContender = (currentContender == 'X') ? 'O' : 'X';
+        }
+
+    } while (!gameVictory1
+     && !gameDraw);
+
+    cout << "Final situation of the game:" << endl;
+    displayBoard(table);
+
+    if (gameVictory1
+    ) 
+    {
+        cout << "Player " << currentContender << " wins!" << endl;
+    }
+    else 
+    {
+        cout << "This game is a draw!" << endl;
+    }
+
+    return 0;
+}
