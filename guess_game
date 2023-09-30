@@ -1,0 +1,82 @@
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() 
+{
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    int lowerlimit, upperlimit, maxtry;
+
+    cout << "Welcome to the Number Guessing Game!" << endl;
+    cout << "Choose your dsired difficulty  level number:" << endl;
+    cout << "1. Easy (1-10, 5 attempts)" << endl;
+    cout << "2. Medium (1-50, 8 attempts)" << endl;
+    cout << "3. Difficult (1-100, 10 attempts)" << endl;
+    cout << "Enter your desired  level number: ";
+
+    int  level_number;
+    cin >>  level_number;
+
+    switch ( level_number) 
+    {
+        case 1:
+            lowerlimit = 1;
+            upperlimit = 10;
+            maxtry = 5;
+            break;
+        case 2:
+            lowerlimit = 1;
+            upperlimit = 50;
+            maxtry = 8;
+            break;
+        case 3:
+            lowerlimit = 1;
+            upperlimit = 100;
+            maxtry = 10;
+            break;
+        default:
+            cout << "The choice of your level is invalid. Thank you" << endl;
+            return 1;
+    }
+
+    
+    int guessNumber = rand() % (upperlimit - lowerlimit + 1) + lowerlimit;
+
+    int choice;
+    int attempts = 0;
+
+    cout << "I have choosen a random_number from " << lowerlimit << " and " << upperlimit << "." << endl;
+    cout << "Try to choice it within " << maxtry << " attempts. Let's start!" << endl;
+
+    do {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        attempts++;
+
+        if (choice < guessNumber) 
+        {
+            cout << "Too low. Try again";
+        } 
+        else if (choice > guessNumber)
+        {
+            cout << "Too high. Try again";
+        }
+
+        if (attempts == maxtry) 
+        {
+            cout << "Sorry, you've run out of attempts. The correct_number was " << guessNumber << "." << endl;
+            break;
+        } 
+        else if (choice == guessNumber) 
+        {
+            cout << "Congratulations! You guessed the_number " << guessNumber << " in " << attempts << " attempts." << endl;
+        } else 
+        {
+            cout << "Attempts remaining: " << maxtry - attempts << endl;
+        }
+
+    } while (choice != guessNumber && attempts < maxtry);
+
+    return 0;
+}
