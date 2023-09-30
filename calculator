@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int a, b, c, d, e;
+    float g, h;
+    char x;
+    cout << "This is the program for a basic calculator:"<<endl; 
+    cout <<" 1. Addition (+) \n 2. Subtraction (-) \n 3. Multiplication (*) \n 4. Divison (/) \n 5. Modulus (%)"<<endl;
+    cout << "Enter the first number:";
+    cin >>a;
+    cout << "Enter the second number:";
+    cin >>b;
+    cout << "Enter your desired operator:";
+    cin >>x;
+    switch (x)
+    {
+    case '+':
+        c = a + b;
+        cout << "The sum of the given two operators is:"<<c<<endl;
+        break;
+    case '-':
+        d = a - b;
+        cout << "The difference of the given two operators is:"<<d<<endl;
+        break;
+
+    case '*':
+        e = a * b;
+        cout << "The product of the given two operators is:"<<e<<endl;
+        break;
+
+    case '/':
+        g = (float) a / b;
+        cout << "The quotient of the given two operators is:"<<g<<endl;
+        break;
+
+    case '%':
+        h = a % b;
+        cout << "The remainder of the given two operators is:"<<h<<endl;
+        break;
+    default:
+        cout << "This operation is invalid please choose from the options provided above"<<endl;
+    }
+    return 0;
+}
